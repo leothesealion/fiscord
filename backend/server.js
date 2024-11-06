@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const http = require('http');
 const socketIo = require('socket.io');
+const authRoutes = require('./routes/auth');
 
 dotenv.config();
 
@@ -12,6 +13,9 @@ const io = socketIo(server);
 
 // Middleware
 app.use(express.json());
+
+// Routes
+app.use('/api/auth', authRoutes);
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI, {
